@@ -1,6 +1,6 @@
 <div align="center">
 
-# BA-Spark 蔚蓝档案点击特效
+# BA-Spark-Cursor 蔚蓝档案点击特效 For Web
 
 _✨ 蔚蓝档案风格的鼠标点击&拖尾粒子特效 ✨_
 
