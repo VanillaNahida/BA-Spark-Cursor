@@ -1,8 +1,8 @@
 *, *::before, *::after {
-    cursor: url('./assets/millennium_base.png') 0 0, auto !important;
+    cursor: url('./assets/millennium_base.png') 5 9, auto !important;
 }
 
 a, button, [role="button"], input[type="submit"], input[type="button"],
 select, label[for], .clickable, [onclick] {
-    cursor: url('./assets/millennium_link.png') 4 0, pointer !important;
+    cursor: url('./assets/millennium_link.png') 5 9, pointer !important;
 }
