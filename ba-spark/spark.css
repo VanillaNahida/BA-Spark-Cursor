@@ -1,9 +1,7 @@
 html, body {
-    pointer-events: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: transparent;
 }
 
 canvas#sparkCanvas {
