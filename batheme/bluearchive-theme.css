@@ -1,0 +1,443 @@
+/* Blue Archive Theme for Flarum - 完整对话框风格 */
+
+/* ========== 图标和装饰变量 ========== */
+:root {
+  --vp-icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E");
+  --vp-icon-copied: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4'/%3E%3C/svg%3E");
+}
+
+/* ========== CSS 变量系统 ========== */
+:root {
+  --transition-time: 0.3s;
+  --transition-curve: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 浅色主题配色 */
+  --btn-hover: #33495d;
+  --btn-background: #425c8b;
+  --color-blue: #128afa;
+  --font-color-gold: #ffe401;
+  --font-color-grey: #4c5866;
+  --icon-color: #466398;
+  --blur-val: blur(15px);
+  --general-background-color: #eaeff5;
+  --foreground-color: white;
+  --blue-shadow-color: 40, 135, 200;
+  --wave-color1: rgba(234, 239, 245, 0.8);
+  --wave-color2: rgba(234, 239, 245, 0.5);
+  --pot-border-left: #c7e4f6;
+  --dot: rgba(0, 0, 0, 0.2);
+  --dot-active: #128afa;
+  --infobox-background-initial: rgba(255, 255, 255, 0.1);
+  --infobox-background-final: rgba(255, 255, 255, 0.5);
+  --triangle-background: repeating-linear-gradient(
+      60deg,
+      rgba(190, 242, 255, 0.3),
+      transparent 35px
+    ),
+    repeating-linear-gradient(180deg, transparent, rgba(108, 230, 255, 0.3) 30px),
+    repeating-linear-gradient(120deg, rgba(16, 179, 215, 0.3), transparent 46px);
+  --img-brightness: brightness(100%);
+  --welcome-text-color: var(--foreground-color);
+  --welcome-text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  --info-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --post-InnerBanner-color: white;
+  --infobox-border-color: white;
+  --downarrow-color: white;
+  --content-opacity: 0.25;
+}
+
+/* ========== 暗色主题 ========== */
+html[data-theme="dark"],
+body.dark-theme,
+.App-dark {
+  --btn-hover: #797995;
+  --btn-background: #5c5c76bf;
+  --color-blue: #705781;
+  --font-color-gold: #cfc6ff;
+  --font-color-grey: #c8c8dc;
+  --icon-color: #9d7cd8;
+  --blur-val: blur(8px);
+  --general-background-color: #0f0f16;
+  --foreground-color: #1f1f2c;
+  --blue-shadow-color: 147, 113, 207;
+  --wave-color1: rgba(30, 30, 50, 0.604);
+  --wave-color2: rgba(21, 21, 28, 0.384);
+  --pot-border-left: rgba(135, 112, 210, 0.687);
+  --dot: rgba(150, 149, 149, 0.2);
+  --dot-active: #624398;
+  --infobox-background-initial: rgba(32, 27, 38, 0.6);
+  --infobox-background-final: rgba(32, 29, 42, 0.9);
+  --triangle-background: repeating-linear-gradient(
+      60deg,
+      rgba(158, 124, 216, 0.15),
+      transparent 35px
+    ),
+    repeating-linear-gradient(180deg, transparent, rgba(157, 124, 216, 0.08) 30px),
+    repeating-linear-gradient(120deg, rgba(157, 124, 216, 0.08), transparent 46px);
+  --img-brightness: brightness(80%);
+  --welcome-text-color: #dcdce2;
+  --welcome-text-shadow: 0 0 5px rgba(79, 45, 138, 0.4);
+  --info-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --post-InnerBanner-color: #d9ddecef;
+  --infobox-border-color: #2c2c39b5;
+  --downarrow-color: rgba(255, 255, 255, 0.597);
+  --content-opacity: 0.1;
+}
+
+/* ========== 全局样式 ========== */
+body {
+  background-color: var(--general-background-color) !important;
+  background-image: url('assets/background.svg') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  color: var(--font-color-grey) !important;
+  font-family: "Blueaka", sans-serif !important;
+  font-weight: 400 !important;
+  transition: background-image 0.5s, background-color 0.5s !important;
+}
+
+/* 加粗元素使用 Blueaka Bold */
+b, strong, h1, h2, h3, h4, h5, h6, .bold-text {
+  font-weight: 700 !important;
+}
+
+/* 暗色背景 */
+html[data-theme="dark"] body,
+body.dark-theme {
+  background-image: url('assets/background_dark.svg') !important;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: var(--color-blue);
+  cursor: pointer;
+}
+
+/* ========== 头部/英雄区域 - 对话框风格 ========== */
+header.Hero,
+.DiscussionHero {
+  background: linear-gradient(0.25turn, transparent, var(--foreground-color) 25%),
+    var(--triangle-background) !important;
+  backdrop-filter: var(--blur-val) !important;
+  box-shadow: 0px 0px 8px rgba(var(--blue-shadow-color), 0.8) !important;
+  border-radius: 0 0 32px 32px !important;
+  border-bottom: 2px solid var(--foreground-color) !important;
+  border-left: 2px solid var(--foreground-color) !important;
+  border-right: 2px solid var(--foreground-color) !important;
+}
+
+.DiscussionHero--colored,
+.DiscussionHero--colored a {
+  color: var(--font-color-grey) !important;
+}
+
+/* ========== 讨论列表 - 对话框风格 ========== */
+.IndexPage .DiscussionListItem,
+.UserPage .DiscussionListItem,
+li.item-nav {
+  background-color: var(--foreground-color) !important;
+  border-radius: 32px !important;
+  border-left: 16px solid var(--pot-border-left) !important;
+  box-shadow: 0px 0px 8px rgba(var(--blue-shadow-color), 0.8) !important;
+  transition: all 0.5s !important;
+  margin: 15px auto !important;
+  padding: 16px 24px !important;
+}
+
+.IndexPage .DiscussionListItem:hover,
+.UserPage .DiscussionListItem:hover {
+  transform: translateY(-2px);
+}
+
+/* ========== 帖子内容 - 对话框风格 ========== */
+.Post-body {
+  background-color: var(--foreground-color) !important;
+  border-radius: 32px !important;
+  border: 2px solid var(--foreground-color) !important;
+  box-shadow: 0px 0px 8px rgba(var(--blue-shadow-color), 0.8) !important;
+  padding: 24px !important;
+  font-size: 14px !important;
+  line-height: 28px !important;
+  transition: all 0.5s !important;
+  /* 添加网格背景 */
+  background-image: linear-gradient(90deg, rgba(159, 219, 252, 0.15) 3%, transparent 0),
+    linear-gradient(1turn, rgba(159, 219, 252, 0.15) 3%, transparent 0) !important;
+  background-size: 20px 20px !important;
+  background-position: 50% !important;
+}
+
+html[data-theme="dark"] .Post-body,
+body.dark-theme .Post-body {
+  background-image: linear-gradient(90deg, rgba(207, 198, 255, 0.08) 3%, transparent 0),
+    linear-gradient(1turn, rgba(207, 198, 255, 0.08) 3%, transparent 0) !important;
+}
+
+/* ========== 卡片和小部件 ========== */
+.card,
+.AfruxWidgets-Widget,
+.AfruxWidgets-Widget.Afrux-ForumStatsWidgetWidget {
+  background-color: var(--foreground-color) !important;
+  border-radius: 32px !important;
+  box-shadow: 0px 0px 8px rgba(var(--blue-shadow-color), 0.8) !important;
+  backdrop-filter: var(--blur-val) !important;
+}
+
+/* ========== 头像 - 对话框角色风格 ========== */
+.Avatar {
+  border: 2px solid var(--pot-border-left) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 4px rgba(var(--blue-shadow-color), 0.4) !important;
+  filter: var(--img-brightness) !important;
+  transition: transform 0.6s ease, box-shadow 0.4s ease, filter 0.5s !important;
+}
+
+.Avatar:hover {
+  transform: rotate(1turn) scale(1.1) !important;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ========== 标签 ========== */
+.TagTiles > li {
+  background-color: var(--foreground-color) !important;
+  border-radius: 32px !important;
+  box-shadow: 0px 0px 8px rgba(var(--blue-shadow-color), 0.8) !important;
+  border-left: 8px solid var(--pot-border-left) !important;
+}
+
+/* ========== 侧边导航 ========== */
+.sideNav > ul {
+  background-color: var(--foreground-color) !important;
+  border-radius: 32px !important;
+  box-shadow: 0px 0px 8px rgba(var(--blue-shadow-color), 0.8) !important;
+  backdrop-filter: var(--blur-val) !important;
+  border: 2px solid var(--foreground-color) !important;
+}
+
+/* ========== 按钮 ========== */
+.Button {
+  border-radius: 16px !important;
+  transition: all 0.5s !important;
+}
+
+.Button:hover {
+  background-color: var(--btn-hover) !important;
+  color: var(--font-color-gold) !important;
+  transform: translateY(-2px);
+}
+
+/* ========== 链接 ========== */
+a {
+  color: var(--color-blue) !important;
+  transition: color 0.25s, opacity 0.25s !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+a:hover {
+  color: var(--btn-hover) !important;
+}
+
+/* ========== 内容排版样式 ========== */
+
+/* 标题 */
+.Post-body h1,
+.Post-body h2,
+.Post-body h3,
+.Post-body h4,
+.Post-body h5,
+.Post-body h6 {
+  color: var(--font-color-grey) !important;
+  font-weight: 600 !important;
+}
+
+.Post-body h1 {
+  font-size: 28px !important;
+  line-height: 40px !important;
+}
+
+.Post-body h2 {
+  font-size: 24px !important;
+  line-height: 32px !important;
+  margin-top: 24px !important;
+  padding-top: 16px !important;
+  border-top: 2px dashed var(--pot-border-left) !important;
+}
+
+.Post-body h3 {
+  font-size: 20px !important;
+  line-height: 28px !important;
+  margin-top: 20px !important;
+}
+
+/* 段落 */
+.Post-body p {
+  margin: 16px 0 !important;
+}
+
+/* 引用块 - 对话框风格 */
+.Post-body blockquote {
+  margin: 16px 0 !important;
+  border-left: 3px solid #5cd3ff !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  background-color: rgba(92, 211, 255, 0.15) !important;
+  border-radius: 16px !important;
+}
+
+html[data-theme="dark"] .Post-body blockquote,
+body.dark-theme .Post-body blockquote {
+  background-color: rgba(157, 124, 216, 0.1) !important;
+  border-left: 3px solid #9d7cd8 !important;
+}
+
+/* 代码块 */
+.Post-body pre,
+.Post-body code {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  border-radius: 8px !important;
+  font-family: monospace !important;
+}
+
+html[data-theme="dark"] .Post-body pre,
+html[data-theme="dark"] .Post-body code,
+body.dark-theme .Post-body pre,
+body.dark-theme .Post-body code {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.Post-body pre {
+  padding: 16px !important;
+  overflow-x: auto !important;
+  border-radius: 16px !important;
+  border: 2px solid var(--pot-border-left) !important;
+}
+
+.Post-body code {
+  padding: 2px 6px !important;
+  font-size: 0.9em !important;
+}
+
+/* 列表 */
+.Post-body ul,
+.Post-body ol {
+  padding-left: 1.5rem !important;
+  margin: 16px 0 !important;
+}
+
+.Post-body li {
+  margin: 8px 0 !important;
+}
+
+/* 表格 */
+.Post-body table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  border: 2px solid var(--pot-border-left) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  margin: 16px 0 !important;
+}
+
+.Post-body th,
+.Post-body td {
+  padding: 12px !important;
+  text-align: left !important;
+  border-bottom: 2px solid var(--pot-border-left) !important;
+}
+
+.Post-body th {
+  background-color: rgba(92, 211, 255, 0.15) !important;
+  color: var(--btn-hover) !important;
+  font-weight: 600 !important;
+}
+
+html[data-theme="dark"] .Post-body th,
+body.dark-theme .Post-body th {
+  background-color: rgba(157, 124, 216, 0.1) !important;
+  color: #e0e0e6 !important;
+}
+
+.Post-body td {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+html[data-theme="dark"] .Post-body td,
+body.dark-theme .Post-body td {
+  background-color: rgba(31, 31, 44, 0.6) !important;
+  color: #c8c8dc !important;
+}
+
+/* 水平分割线 */
+.Post-body hr {
+  border: 0 !important;
+  border-top: 2px dashed var(--pot-border-left) !important;
+  margin: 24px 0 !important;
+}
+
+/* 图片 */
+.Post-body img {
+  max-width: 100% !important;
+  border-radius: 16px !important;
+  filter: var(--img-brightness) !important;
+  transition: filter 0.5s !important;
+  box-shadow: 0 4px 16px rgba(var(--blue-shadow-color), 0.3) !important;
+}
+
+/* ========== 帖子流 ========== */
+.PostStream-item {
+  border-bottom: 1px dashed var(--pot-border-left) !important;
+  padding: 16px 0 !important;
+}
+
+/* ========== 响应式设计 - 移动设备 ========== */
+@media (max-width: 768px) {
+  .IndexPage .DiscussionListItem,
+  .UserPage .DiscussionListItem,
+  li.item-nav {
+    border-radius: 24px !important;
+    border-left-width: 8px !important;
+    margin: 10px !important;
+    padding: 12px 16px !important;
+  }
+  
+  .Post-body {
+    padding: 16px !important;
+    border-radius: 24px !important;
+  }
+  
+  header.Hero,
+  .DiscussionHero {
+    border-radius: 0 0 24px 24px !important;
+  }
+  
+  .TagTiles > li {
+    border-radius: 24px !important;
+    margin: 8px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .DiscussionListItem-content {
+    margin: 8px !important;
+    border-radius: 24px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sideNav > ul {
+    border-radius: 24px !important;
+  }
+}
+
+/* ========== Blue Archive 主题签名 ========== */
+/* Blue Archive Theme for Flarum by VanillaNahida */
